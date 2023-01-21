@@ -10,8 +10,8 @@ let a = '';
 let b = '';
 let finish = false;
 
-const Digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
-const sign = ['*', '/', '-', '+', '%', '+/-', '='];
+const Digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.','00'];
+const sign = ['*', '/', '-', '+', '%', '+/-', '=','<='];
 
 function ClearAll() {
     a = '';
@@ -41,7 +41,7 @@ arBtn.forEach(btn => {
 
         //если нажата цифра - не знак то
         if (Digits.includes(btn.textContent)) {
-            if (finish) {ClearAll() ; if ( btn.textContent == '.') main_string.textContent = '0';}
+            if (finish) {ClearAll() ; if ( btn.textContent == '.') {main_string.textContent = '0';} else main_string.textContent = ''; }
             main_string.textContent += btn.textContent;
             if (znak === '' && !finish) { a += btn.textContent;  console.log("a += btn.textContent")}  // запоминаем а
             else if (znak !== '') { b += btn.textContent };//запоминаем b
@@ -51,7 +51,7 @@ arBtn.forEach(btn => {
         if (finish) {
             if (Digits.includes(btn.textContent)) {  
                         ClearAll() ; 
-                        if ( btn.textContent == '.') main_string.textContent = '0' ; 
+                        if ( btn.textContent == '.') {main_string.textContent = '0';} else main_string.textContent = '';
                     }
                    //если нажат знак тогда в а записывем первое число 
             if (sign.includes(btn.textContent)) {
@@ -69,8 +69,8 @@ arBtn.forEach(btn => {
 //вытягиваем знак
 document.querySelector(".buttons").addEventListener("click", function (e) {
     const avent = e.target.dataset.action; //аттрибут data-action
+    console.log(e.target.dataset.action)
     if (avent) {
-
         ActionGo[avent]();
     }
     // else {main_string.textContent +=  btn.textContent;}
@@ -78,6 +78,14 @@ document.querySelector(".buttons").addEventListener("click", function (e) {
 
 let ActionGo = {
     reset() { ClearAll() },
+    bsp() {
+        console.log("back")
+        if (main_string.textContent.length >1)
+        {main_string.textContent = main_string.textContent.substring(0, main_string.textContent.length - 1);
+         a = main_string.textContent;
+        }
+        else { main_string.textContent ='0'; ClearAll();}
+    },
     delenie() {
         znak = "/";  
         main_string.textContent += znak;
@@ -98,24 +106,24 @@ let ActionGo = {
         znak = "%";  
         main_string.textContent += znak;
     },
+
     ravno() {
         main_primer.textContent = main_string.textContent;
         RESULT()
-    },
-
-
+    }
 }
 
 function RESULT() {
     if (b==='') b = a;
     
     switch (znak) {
-        case "/": { main_string.textContent =  Math.round((+a) / (+b)*100)/100;  break;}
-        case "+": { main_string.textContent = (+a) + (+b);  console.log(a, b, znak); break;}
-        case "-": { main_string.textContent = (+a) - (+b);   console.log(a, b, znak); break;}
+        case "/": { main_string.textContent = Math.round((+a) / (+b)*100)/100;  break;}
+        case "+": { main_string.textContent =  Math.round(((+a) + (+b))*100)/100;  console.log(a, b, znak); break;}
+        case "-": { main_string.textContent =  Math.round(((+a) - (+b))*100)/100;   console.log(a, b, znak); break;}
         case "%": { main_string.textContent = (Math.round(((+a) * 100)/(+b)*100)/100);  console.log(a, b, znak); break;}
         case "*": { main_string.textContent = Math.round((+a) * (+b)*100)/100;  console.log(a, b, znak); break;}
-      //  case "/": { main_string.textContent = (+a) / (+b); console.log((+a) / (+b)); console.log(a, b, znak); break;}
+        case "00": { main_string.textContent = (+a) / (+b); console.log((+a) / (+b)); console.log(a, b, znak); break;}
+
 
     }
    // znak = '';
