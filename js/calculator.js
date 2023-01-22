@@ -15,6 +15,7 @@ const sign = ['*', '/', '-', '+', '%', '+/-', '=','<='];
 
 function ClearAll() {
     a = '';
+    znak = '';
     b = '';
     finish = false;
     main_string.textContent = '0';
@@ -37,27 +38,37 @@ arBtn.forEach(btn => {
 
     btn.addEventListener("click", function () {
         if (main_string.textContent == "0" && btn.textContent !== '.') main_string.textContent = '';
-        
 
         //если нажата цифра - не знак то
         if (Digits.includes(btn.textContent)) {
-            if (finish) {ClearAll() ; if ( btn.textContent == '.') {main_string.textContent = '0';} else main_string.textContent = ''; }
+            if (finish) {
+               // ClearAll() ;
+                if ( btn.textContent == '.') {main_string.textContent = '0';}
+                else if (btn.textContent !== '00') {main_string.textContent = '';}
+            }
+
             main_string.textContent += btn.textContent;
-            if (znak === '' && !finish) { a += btn.textContent;  console.log("a += btn.textContent")}  // запоминаем а
+            if (znak ==='') { a += btn.textContent;  console.log("a += btn.textContent")}  // запоминаем а
             else if (znak !== '') { b += btn.textContent };//запоминаем b
-           // console.log(a, b, finish);
+            console.log(a, b, 'Finish ='+finish, 'ZNAK '+znak);
         }
-       // после вычисления и нажатого равно - если нажата кнопка то если знак применяем к результату если число - начинаем сначала
+       // после вычисления и нажатого равно - если нажат знак применяем к результату если число - начинаем сначала
         if (finish) {
-            if (Digits.includes(btn.textContent)) {  
-                        ClearAll() ; 
-                        if ( btn.textContent == '.') {main_string.textContent = '0';} else main_string.textContent = '';
-                    }
-                   //если нажат знак тогда в а записывем первое число 
+            //цифра
+            // if (Digits.includes(btn.textContent)) {
+            //             //ClearAll() ;
+            //             if ( btn.textContent == '.')
+            //                {main_string.textContent = '0';}  else main_string.textContent = '';
+            //     if (znak ==='') { a += btn.textContent;  console.log("a_finish += btn.textContent")}  // запоминаем а
+            //     console.log(a, b, 'Finish ='+finish, 'ZNAK '+znak);
+            // }
+
+
+              //если нажат знак тогда в а записывем первое число
             if (sign.includes(btn.textContent)) {
                a = main_string.textContent;
                b = '';
-              // znak = btn.textContent; 
+               znak = btn.textContent;
                finish = false;
                console.log(a, b, znak, "finish");
             }
@@ -126,8 +137,9 @@ function RESULT() {
 
 
     }
-   // znak = '';
+    znak = '';
     finish = true;
+    a = main_string.textContent;
     main_history.textContent = main_primer.textContent+'='+main_string.textContent;
     console.log(a, b, znak, "ravno");
 }
