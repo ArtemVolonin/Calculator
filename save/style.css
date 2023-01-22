@@ -1,0 +1,101 @@
+body{
+    background-image: url("img/background1.jpg");
+}
+.main {
+    height: 650px;
+    width: 300px;
+    border: 5px solid #000;
+    border-radius: 20px;
+    margin: 100px auto;
+    background-color: white;
+    box-sizing: border-box;
+}
+.img_bar{
+    height: 14px;
+
+    margin-right: 10px ;
+}
+.screen {
+    height: 200px;
+    background-color: rgb(244, 93, 28);
+    padding: 10px 20px;
+
+    /*  display: flex;  */
+}
+
+.screen p {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+
+}
+
+.toolbar {
+    margin: 5px;
+     display: flex;
+     justify-content: space-between;
+    padding: 5px;
+}
+
+.screen .main_string {
+    text-align: right;
+    color: white;
+    font-size: 70px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+  
+
+}
+
+.screen .main_primer {
+    text-align: right;
+    color: white;
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+
+}
+
+.history {
+    justify-content: space-between;
+    font-size: 10px;
+    display: flex;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    padding: 20px 6px;
+}
+
+.btn {
+    flex-wrap: nowrap;
+    user-select: none;
+    cursor: pointer;
+    width: 21%;
+    height: 20%;
+    margin: 5px;
+    margin-bottom: 17px;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /*  border: 1px solid black; */
+    text-align: center;
+}
+.btn[data-action="bsp"] img{
+    width: 30px;
+margin: auto;
+}
+.btn:hover {
+   /*  box-shadow: 1px 1px 5px rgb(72, 72, 72); */
+}
+
+.red {
+    color: rgb(242, 24, 24);
+}
+ .keydown{
+    box-shadow: 2px 2px 5px rgb(86, 86, 86);
+ }
