@@ -38,10 +38,11 @@ arBtn.forEach(btn => {
 
     btn.addEventListener("click", function () {
         // если сложение более чем в несколько действий, то выполняем первое дейстивие
+        if (sign.includes(btn.textContent)) {
         if (znak !== '' && a!=='' && b !== '') {
             RESULT(); // нажать равно
-        }
-        if (main_string.textContent == "0" && btn.textContent !== '.') main_string.textContent = '';
+        }}
+        if (main_string.textContent == "0" && btn.textContent !== '.' && !finish) main_string.textContent = '';
 
         //если нажата цифра - не знак то
         if (Digits.includes(btn.textContent)) {
