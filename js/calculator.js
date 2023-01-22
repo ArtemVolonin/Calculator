@@ -39,8 +39,7 @@ arBtn.forEach(btn => {
     btn.addEventListener("click", function () {
         // если сложение более чем в несколько действий, то выполняем первое дейстивие
         if (znak !== '' && a!=='' && b !== '') {
-            RESULT();
-
+            RESULT(); // нажать равно
         }
         if (main_string.textContent == "0" && btn.textContent !== '.') main_string.textContent = '';
 
@@ -78,19 +77,26 @@ arBtn.forEach(btn => {
                console.log(a, b, znak, "finish");
             }
         }
-
+        //вытягиваем знак
+        if (znak !== "="){
+        const avent = btn.getAttribute("data-action"); //btn.target.dataset.action; //аттрибут data-action
+        console.log(btn.getAttribute("data-action"))
+        if (avent) {
+            ActionGo[avent]();
+        }
+        } else znak = '';
 
     })
 });
 //вытягиваем знак
-document.querySelector(".buttons").addEventListener("click", function (e) {
-    const avent = e.target.dataset.action; //аттрибут data-action
-    console.log(e.target.dataset.action)
-    if (avent) {
-        ActionGo[avent]();
-    }
-    // else {main_string.textContent +=  btn.textContent;}
-})
+// document.querySelector(".buttons").addEventListener("click", function (e) {
+//     const avent = e.target.dataset.action; //аттрибут data-action
+//     console.log(e.target.dataset.action)
+//     if (avent) {
+//         ActionGo[avent]();
+//     }
+//     // else {main_string.textContent +=  btn.textContent;}
+// })
 
 let ActionGo = {
     reset() { ClearAll() },
@@ -131,7 +137,7 @@ let ActionGo = {
 
 function RESULT() {
     if (b==='') b = a;
-    
+    main_primer.textContent = main_string.textContent;
     switch (znak) {
         case "/": { main_string.textContent = Math.round((+a) / (+b)*100)/100;  break;}
         case "+": { main_string.textContent =  Math.round(((+a) + (+b))*100)/100;  console.log(a, b, znak); break;}
